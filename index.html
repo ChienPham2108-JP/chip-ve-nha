@@ -54,6 +54,7 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
 @keyframes up{from{transform:translateY(60px);opacity:0}}
 @media (min-width:640px){#sheet{align-items:center}.paper{border-radius:26px}}
 .paper pre{white-space:pre-wrap;font:inherit;font-size:17px;line-height:1.5;margin:10px 0 0}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin-bottom:8px}.tabs button{min-height:40px;padding:6px 12px;font-size:14px}
 .seal{font-size:46px;text-align:center}
 #over{position:fixed;inset:0;z-index:20;background:#ffc2d7cc;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;font-size:clamp(26px,8vw,40px);font-weight:800;color:#7a2e4a;pointer-events:none}
 #over.on{display:flex}
@@ -81,7 +82,7 @@ button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
   <div class="stage" id="stage"></div>
   <div class="msg" id="msg">Chạm vào hai bạn mèo nhé 🐾</div>
 
-  <div class="row"><button id="letter">💌 Thư tình</button><button class="alt" id="theme">Sáng / tối</button></div>
+  <div class="row"><button id="letter">💌 Ba bức thư tình</button><button class="alt" id="theme">Sáng / tối</button></div>
 
   <div class="card"><h2>Lời hẹn của ck và vk</h2><ul class="todo" id="todo"></ul></div>
 </div>
@@ -100,7 +101,11 @@ const C={
   before:'Vk nhớ mang theo nụ cười nhé, còn lại ck lo hết',
   flying:'Trên mây có gió, nhưng gió nào cũng đang thổi vk về phía ck',
   landed:'Vk về rồi. Ck ở ngay sảnh đến, đang cười như một cậu bé',
-  letter:'Vk yêu của ck,\n\nCk không giỏi nói lời hoa mỹ, nhưng ck biết ngày nào không có vk cũng dài hơn bình thường. Hôm nay vk về, ck sẽ ra sớm hơn giờ máy bay hạ cánh, vì ck không muốn bỏ lỡ giây phút đầu tiên được nhìn thấy vk.\n\nCảm ơn vk đã luôn là nơi ck muốn trở về.\n\nYêu vk,\nCk',
+  letters:[
+'Vk yêu của ck,\n\nMorning vk iu của ck ơi ☀️ Have a fantastic day nha bae. Ck mong vk iu từng giây từng phút luôn đó. Ck hồi hộp đến mức tim đập loạn nhịp hết cả rồi, chắc tim ck cũng biết hôm nay vk về nên nó mừng quá đó.\n\nGiờ này chắc vk đang xếp nốt đồ, kiểm tra lại giấy tờ và lo xem có quên gì không. Vk đừng lo gì hết nhé, chỉ cần mang theo nụ cười thôi, còn lại ck lo hết. Vk quên gì cũng được, miễn là đừng quên ck nha 🥺\n\nCk không giỏi nói lời hoa mỹ, nhưng ck biết ngày nào không có vk cũng dài hơn bình thường, dài như cả một mùa vậy đó. Vk đi đường nhớ ăn chút gì đó, uống đủ nước, và nhắn cho ck khi lên máy bay nha. Ck sẽ ngồi canh điện thoại như canh vàng luôn 💗\n\nYêu vk nhiều nhiều,\nAnh C',
+'Vk yêu của ck,\n\nHiiiii bae😘, giờ vk đang ở trên mây rồi đúng không? Vk bay trên trời còn ck thì lơ lửng dưới đất vì nhớ vk đó 🥹 Tim ck đang bay cùng vk iu.\n\nNếu vk thấy mệt thì cứ nhắm mắt một xíu thôi, mở mắt ra là mình sắp được gần nhau rồi. Cứ tưởng tượng ck đang ôm vk thật chặt, chặt đến mức vk không thở nổi luôn 🤗\n\nCk nhớ những ngày mà mình ngồi bên cạnh nhau, ăn cơm, đi dạo, ngồi nói chuyện linh tinh, rồi nhận ra đó mới là điều ck nhớ nhất trên đời.\n\nBay bình an vk iu na. Ck sẽ có mặt ở sảnh đến thật sớm, đứng đợi với trái tim đập thình thịch 💓\n\nYêu vk nhiều nhiều,\nAnh C',
+'Vk yêu của ck,\n\nVk về rồi!!!🤩😘🥰 Ck ở ngay sảnh đến nè, đang cười như một cậu bé được nhận quà luôn đó. Vk cứ thong thả lấy hành lý, ck không đi đâu hết, ck đợi vk ở đây, đợi cả đời cũng được.\n\nCảm ơn vk đã luôn hướng về ck, muốn trở về bên ck. Có vk ở bên là ck thấy cả Hà Nội đẹp hơn hẳn, nắng cũng dịu dàng hơn, gió cũng thơm hơn nữa.\n\nGiờ thì lại đây cho ck ôm một cái thật chặt nào để ck hít hà mùi hương vk mà ck luôn mong mỏi, thơm đôi môi ngọt ngào của vk, bae 🤗💕\n\nChào mừng vk về nhà🌈🏡🌷.\n\nYêu vk nhiều nhiều thật nhiều,\nAnh C'
+  ],
   todo:['Một cái ôm thật chặt ở sảnh đến','Đi ăn món vk thích nhất','Nắm tay đi dạo một vòng']
 };
 /* ========================================= */
@@ -166,23 +171,31 @@ tick();setInterval(tick,1000);
 // tắt lớp phủ sau vài giây để xem tiếp trang
 setTimeout(function chk(){if(Date.now()>=LAND){setTimeout(()=>$('over').classList.remove('on'),6000)}else setTimeout(chk,1000)},1000);
 
-// Thư tình
+// Thư tình: 3 bức theo 3 mốc giờ
+const TABS=['Trước giờ bay','Trên chuyến bay','Khi hạ cánh'];
+const UNLOCK=[0,TAKEOFF.getTime(),LAND.getTime()];
+const peek=[false,false,false];
 let typing;
-function openLetter(preview){
-  const locked=Date.now()<LAND&&!preview;
+function phaseIdx(){const n=Date.now();return n>=LAND?2:n>=TAKEOFF?1:0}
+function openLetter(i){
+  if(i===undefined)i=phaseIdx();
+  const unlocked=Date.now()>=UNLOCK[i]||peek[i];
+  const tabs='<div class="tabs">'+TABS.map((t,k)=>`<button class="${k===i?'':'alt'}" data-k="${k}">${t}</button>`).join('')+'</div>';
   const p=$('paper');
-  if(locked){
-    p.innerHTML='<div class="seal">💌</div><p style="text-align:center;font-weight:700">Mở khi vk hạ cánh</p><div class="row"><button class="alt" id="pv">Xem trước (dành cho ck)</button><button id="cl">Đóng</button></div>';
-    $('pv').onclick=()=>openLetter(true);
+  clearInterval(typing);
+  if(unlocked){
+    p.innerHTML=tabs+'<div class="seal">💖</div><pre id="txt"></pre><div class="row"><button id="cl">Đóng</button></div>';
+    const L=C.letters[i];let n=0;
+    typing=setInterval(()=>{$('txt').textContent=L.slice(0,++n);if(n>=L.length)clearInterval(typing)},30);
   }else{
-    p.innerHTML='<div class="seal">💖</div><pre id="txt"></pre><div class="row"><button id="cl">Đóng</button></div>';
-    let i=0;clearInterval(typing);
-    typing=setInterval(()=>{$('txt').textContent=C.letter.slice(0,++i);if(i>=C.letter.length)clearInterval(typing)},35);
+    p.innerHTML=tabs+'<div class="seal">🔒</div><p style="text-align:center;font-weight:700">Bức thư này sẽ mở khi tới mốc: '+TABS[i]+'</p><div class="row"><button class="alt" id="pv">Xem trước (dành cho ck)</button><button id="cl">Đóng</button></div>';
+    $('pv').onclick=()=>{peek[i]=true;openLetter(i)};
   }
+  p.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>openLetter(+b.dataset.k));
   $('cl').onclick=close;$('sheet').classList.add('on');
 }
 function close(){clearInterval(typing);$('sheet').classList.remove('on')}
-$('letter').onclick=()=>openLetter(false);
+$('letter').onclick=()=>openLetter();
 $('sheet').onclick=e=>{if(e.target.id==='sheet')close()};
 
 $('theme').onclick=()=>{const r=document.documentElement;
