@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chip về nhà 💌</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💌</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#ffe3ec;--bg2:#fff4f7;--ink:#7a2e4a;--pink:#ff8fb1;--red:#e8456f;--card:#fffafb;--shadow:#f3b3c6}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a1b3d;--bg2:#3a2653;--ink:#ffd9e6;--pink:#ff9ec0;--red:#ff6d96;--card:#46305f;--shadow:#1d1230}}
+:root[data-theme="dark"]{--bg:#2a1b3d;--bg2:#3a2653;--ink:#ffd9e6;--pink:#ff9ec0;--red:#ff6d96;--card:#46305f;--shadow:#1d1230}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{min-height:100dvh;font-family:"Baloo 2",system-ui,sans-serif;color:var(--ink);text-align:center;background:radial-gradient(circle at 20% 8%,var(--bg2),transparent 45%),var(--bg);overflow-x:hidden;padding:env(safe-area-inset-top,0) 0 env(safe-area-inset-bottom,0)}
+.wrap{max-width:560px;margin:0 auto;padding:16px 14px 36px}
+.app{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+h1{font-size:clamp(24px,7vw,36px);margin:2px 0 0;font-weight:800;line-height:1.1}
+.cap{margin:6px 0 14px;font-size:clamp(15px,4.2vw,18px);min-height:2.6em;transition:opacity .6s}
+.timer{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.box{background:var(--card);border-radius:22px;padding:10px 0 6px;border:3px solid var(--pink);box-shadow:0 5px 0 var(--shadow)}
+.box b{display:block;font-size:clamp(26px,9vw,46px);line-height:1;font-weight:800;color:var(--red);font-variant-numeric:tabular-nums}
+.box span{font-size:13px}
+.card{margin-top:16px;background:var(--card);border-radius:22px;padding:14px;border:2px dashed var(--pink);text-align:left}
+.fl{display:flex;justify-content:space-between;align-items:center;font-weight:700}
+.fl small{display:block;font-weight:500;font-size:12px;opacity:.8}
+.bar{position:relative;height:8px;border-radius:9px;background:var(--shadow);margin:20px 6px 8px}
+.fill{height:100%;border-radius:9px;background:var(--red);width:0}
+.plane{position:absolute;top:-14px;left:0;font-size:22px;transform:translateX(-50%)}
+.phase{margin:10px 0 0;font-size:15px;text-align:center}
+.stage{display:flex;justify-content:center;align-items:flex-end;height:min(52vw,210px);margin-top:12px;transition:gap .8s ease}
+.cat{width:min(28vw,128px);height:auto;cursor:pointer;animation:bob 2.2s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+.cat+.cat{animation-delay:-1.1s}
+.blush{opacity:0;transition:opacity .6s}.close .blush{opacity:.9}
+.hug .cat{margin:0 -6px}
+@keyframes bob{50%{transform:translateY(-8px)}}
+.msg{min-height:28px;font-size:18px;font-weight:700;margin-top:4px}
+.row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+button{font:inherit;min-height:44px;padding:8px 18px;border:0;border-radius:99px;background:var(--red);color:#fff;font-weight:700;cursor:pointer;box-shadow:0 4px 0 #b32d51}
+button.alt{background:var(--pink);color:#5a1e36;box-shadow:0 4px 0 var(--shadow)}
+button:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+.card h2{margin:0 0 6px;font-size:17px}
+.todo{list-style:none;margin:0;padding:0}
+.todo li{padding:8px 0;display:flex;gap:10px;align-items:center}
+.todo li::before{content:"🤍";transition:transform .4s}
+.todo.done li::before{content:"💖";transform:scale(1.2)}
+.heart{position:fixed;pointer-events:none;font-size:22px;z-index:30;animation:fly 1.4s ease-out forwards}
+@keyframes fly{to{transform:translateY(-140px) scale(1.4);opacity:0}}
+.fall{position:fixed;top:-30px;pointer-events:none;z-index:25;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(40deg)}}
+#sheet{position:fixed;inset:0;background:#0007;display:none;align-items:flex-end;justify-content:center;z-index:40}
+#sheet.on{display:flex}
+.paper{background:var(--card);width:100%;max-width:520px;max-height:85dvh;overflow:auto;border-radius:26px 26px 0 0;padding:22px 20px calc(22px + env(safe-area-inset-bottom,0));text-align:left;animation:up .4s ease}
+@keyframes up{from{transform:translateY(60px);opacity:0}}
+@media (min-width:640px){#sheet{align-items:center}.paper{border-radius:26px}}
+.paper pre{white-space:pre-wrap;font:inherit;font-size:17px;line-height:1.5;margin:10px 0 0}
+.seal{font-size:46px;text-align:center}
+#over{position:fixed;inset:0;z-index:20;background:#ffc2d7cc;display:none;align-items:center;justify-content:center;flex-direction:column;padding:20px;font-size:clamp(26px,8vw,40px);font-weight:800;color:#7a2e4a;pointer-events:none}
+#over.on{display:flex}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap" id="app">
+  <div class="app">Chip về nhà 💌</div>
+  <h1 id="title">Ck đợi vk</h1>
+  <p class="cap" id="cap"></p>
+  <div class="timer">
+    <div class="box"><b id="d">0</b><span>ngày</span></div>
+    <div class="box"><b id="h">0</b><span>giờ</span></div>
+    <div class="box"><b id="m">0</b><span>phút</span></div>
+    <div class="box"><b id="s">0</b><span>giây</span></div>
+  </div>
+
+  <div class="card">
+    <div class="fl"><div>SGN 12:40<small>Tân Sơn Nhất · Nhà ga 3</small></div><div style="text-align:center">VU-778<small>2h10m · bay thẳng</small></div><div style="text-align:right">HAN 14:50<small>Nội Bài</small></div></div>
+    <div class="bar"><div class="fill" id="fill"></div><div class="plane" id="plane">✈️</div></div>
+  </div>
+  <p class="phase" id="phase"></p>
+
+  <div class="stage" id="stage"></div>
+  <div class="msg" id="msg">Chạm vào hai bạn mèo nhé 🐾</div>
+
+  <div class="row"><button id="letter">💌 Thư tình</button><button class="alt" id="theme">Sáng / tối</button></div>
+
+  <div class="card"><h2>Lời hẹn của ck và vk</h2><ul class="todo" id="todo"></ul></div>
+</div>
+
+<div id="sheet"><div class="paper" id="paper"></div></div>
+<div id="over"><div>Chào mừng vk<br>về nhà 💕</div></div>
+
+<script>
+/* ===== NỘI DUNG & GIỜ BAY: sửa ở đây ===== */
+const TAKEOFF=new Date('2026-10-03T12:40:00+07:00');
+const LAND=new Date('2026-10-03T14:50:00+07:00');
+const C={
+  tapC:['Vk sắp về rồi nè ck ơi 💗','Vk nhớ ck nhiều lắm','Chờ vk một xíu nữa thôi nha ck'],
+  tapChip:['Ck nhớ vk nhiều lắm','Ck đứng ở sảnh đến chờ vk nè','Bay bình an nha vk, ck đợi vk','Về với ck thôi, vk yêu'],
+  caps:['Mỗi phút trôi qua là ck lại gần vk thêm một chút','Ck đã chuẩn bị sẵn một cái ôm thật chặt cho vk','Vk về là cả Hà Nội đẹp hơn hẳn','Vk là chuyến bay đẹp nhất mà ck từng đợi','Còn một chút nữa thôi, vợ chồng mình lại ở bên nhau'],
+  before:'Vk nhớ mang theo nụ cười nhé, còn lại ck lo hết',
+  flying:'Trên mây có gió, nhưng gió nào cũng đang thổi vk về phía ck',
+  landed:'Vk về rồi. Ck ở ngay sảnh đến, đang cười như một cậu bé',
+  letter:'Vk yêu của ck,\n\nCk không giỏi nói lời hoa mỹ, nhưng ck biết ngày nào không có vk cũng dài hơn bình thường. Hôm nay vk về, ck sẽ ra sớm hơn giờ máy bay hạ cánh, vì ck không muốn bỏ lỡ giây phút đầu tiên được nhìn thấy vk.\n\nCảm ơn vk đã luôn là nơi ck muốn trở về.\n\nYêu vk,\nCk',
+  todo:['Một cái ôm thật chặt ở sảnh đến','Đi ăn món vk thích nhất','Nắm tay đi dạo một vòng']
+};
+/* ========================================= */
+const $=id=>document.getElementById(id);
+
+// Hai bạn mèo gốc: ck = mèo kem nơ xanh, vk = mèo trắng nơ hồng
+function cat(fill,bow,id,label){
+  const ears=`<polygon points="22,40 26,8 52,28" fill="${fill}" stroke="#7a2e4a" stroke-width="3" stroke-linejoin="round"/><polygon points="98,40 94,8 68,28" fill="${fill}" stroke="#7a2e4a" stroke-width="3" stroke-linejoin="round"/>`;
+  const bowSvg=bow==='pink'
+   ?`<path d="M30 22 q-12 -12 -2 -20 q8 -2 12 8 q8 -10 16 -2 q4 10 -8 18z" fill="#ff8fb1" stroke="#7a2e4a" stroke-width="2.5" transform="translate(10 -2) scale(.7)"/>`
+   :`<polygon points="44,10 60,18 76,10 76,28 60,20 44,28" fill="#6aa7ff" stroke="#7a2e4a" stroke-width="2.5" stroke-linejoin="round" transform="translate(14 -2) scale(.8)"/>`;
+  const nose=bow==='pink'?'#ffc94d':'#ff8fb1';
+  return `<svg class="cat" id="${id}" viewBox="0 0 120 120" role="button" aria-label="${label}">${ears}<ellipse cx="60" cy="68" rx="46" ry="38" fill="${fill}" stroke="#7a2e4a" stroke-width="3"/><ellipse cx="38" cy="76" rx="9" ry="6" fill="#ff8fb1" class="blush"/><ellipse cx="82" cy="76" rx="9" ry="6" fill="#ff8fb1" class="blush"/><circle cx="42" cy="66" r="4.5" fill="#7a2e4a"/><circle cx="78" cy="66" r="4.5" fill="#7a2e4a"/><ellipse cx="60" cy="74" rx="4" ry="3" fill="${nose}" stroke="#7a2e4a" stroke-width="1.5"/><path d="M52 82 q8 7 16 0" fill="none" stroke="#7a2e4a" stroke-width="2.5" stroke-linecap="round"/><path d="M14 66h14M14 76h14M92 66h14M92 76h14" stroke="#7a2e4a" stroke-width="2" stroke-linecap="round"/>${bowSvg}</svg>`;
+}
+$('stage').innerHTML=cat('#fff4d6','blue','ck','Ck')+cat('#ffffff','pink','vk','Vk');
+
+const pick=a=>a[Math.floor(Math.random()*a.length)];
+function pop(e,list){
+  $('msg').textContent=pick(list);
+  const x=e.clientX||innerWidth/2,y=e.clientY||innerHeight/2;
+  for(let i=0;i<6;i++){const h=document.createElement('div');h.className='heart';h.textContent=['💗','💖','🎀','✨'][i%4];
+    h.style.left=(x-12+Math.random()*60-30)+'px';h.style.top=(y-12)+'px';document.body.appendChild(h);setTimeout(()=>h.remove(),1400);}
+}
+$('ck').onclick=e=>pop(e,C.tapChip);   // chạm ck -> ck nói
+$('vk').onclick=e=>pop(e,C.tapC);      // chạm vk -> vk nói
+
+$('todo').innerHTML=C.todo.map(t=>`<li>${t}</li>`).join('');
+
+let capI=0;
+function rotateCap(){const el=$('cap');el.style.opacity=0;setTimeout(()=>{el.textContent=C.caps[capI++%C.caps.length];el.style.opacity=1},500)}
+$('cap').textContent=C.caps[capI++];setInterval(rotateCap,10000);
+
+let rain=false;
+function confetti(){
+  if(rain)return;rain=true;
+  setInterval(()=>{const f=document.createElement('div');f.className='fall';f.textContent=['💗','💖','🎀','✨'][Math.floor(Math.random()*4)];
+    f.style.left=Math.random()*100+'vw';f.style.fontSize=(16+Math.random()*18)+'px';f.style.animationDuration=(3+Math.random()*3)+'s';
+    document.body.appendChild(f);setTimeout(()=>f.remove(),6500)},350);
+}
+
+function tick(){
+  const now=Date.now(),left=Math.max(0,LAND-now),t=Math.floor(left/1000);
+  $('d').textContent=Math.floor(t/86400);$('h').textContent=Math.floor(t%86400/3600);
+  $('m').textContent=Math.floor(t%3600/60);$('s').textContent=t%60;
+  const hours=left/3600000,st=$('stage');
+  st.style.gap=(left<=0?0:Math.max(14,Math.min(110,14+hours*9)))+'px';
+  st.classList.toggle('close',hours<24);st.classList.toggle('hug',left<=0);
+  const p=Math.max(0,Math.min(1,(now-TAKEOFF)/(LAND-TAKEOFF)))*100;
+  $('fill').style.width=p+'%';$('plane').style.left=p+'%';
+  if(now<TAKEOFF){
+    const tk=Math.floor((TAKEOFF-now)/60000);
+    $('title').textContent='Ck đợi vk';
+    $('phase').textContent=`Còn ${Math.floor(tk/60)} giờ ${tk%60} phút nữa vk lên máy bay · ${C.before}`;
+  }else if(now<LAND){
+    $('title').textContent='Vk đang bay về với ck';$('phase').textContent=C.flying;
+  }else{
+    $('title').textContent='Vk đã hạ cánh!';$('phase').textContent=C.landed;
+    $('over').classList.add('on');$('todo').classList.add('done');confetti();
+    $('timer')&&0;
+  }
+}
+tick();setInterval(tick,1000);
+// tắt lớp phủ sau vài giây để xem tiếp trang
+setTimeout(function chk(){if(Date.now()>=LAND){setTimeout(()=>$('over').classList.remove('on'),6000)}else setTimeout(chk,1000)},1000);
+
+// Thư tình
+let typing;
+function openLetter(preview){
+  const locked=Date.now()<LAND&&!preview;
+  const p=$('paper');
+  if(locked){
+    p.innerHTML='<div class="seal">💌</div><p style="text-align:center;font-weight:700">Mở khi vk hạ cánh</p><div class="row"><button class="alt" id="pv">Xem trước (dành cho ck)</button><button id="cl">Đóng</button></div>';
+    $('pv').onclick=()=>openLetter(true);
+  }else{
+    p.innerHTML='<div class="seal">💖</div><pre id="txt"></pre><div class="row"><button id="cl">Đóng</button></div>';
+    let i=0;clearInterval(typing);
+    typing=setInterval(()=>{$('txt').textContent=C.letter.slice(0,++i);if(i>=C.letter.length)clearInterval(typing)},35);
+  }
+  $('cl').onclick=close;$('sheet').classList.add('on');
+}
+function close(){clearInterval(typing);$('sheet').classList.remove('on')}
+$('letter').onclick=()=>openLetter(false);
+$('sheet').onclick=e=>{if(e.target.id==='sheet')close()};
+
+$('theme').onclick=()=>{const r=document.documentElement;
+  const dark=getComputedStyle(r).getPropertyValue('--bg').trim()==='#2a1b3d';
+  r.setAttribute('data-theme',dark?'light':'dark')};
+</script>
+</body>
+</html>
